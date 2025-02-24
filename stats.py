@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 
 def get_num_words (text):
-    words = text.split()
-    return len(words)
+    return len(text.split())
 
 def count_letters (text):
     
@@ -22,6 +21,5 @@ def count_letters (text):
 def sort_dict_by_values (unsorted_dict):
     sorted_values = list(unsorted_dict.items())
     sorted_values.sort(key=lambda item: item[1], reverse=True)
-    
     sorted_dict = {key: value for key, value in sorted_values}
     return sorted_dict
