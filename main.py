@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-from config import PATH_TO_BOOK
-from stats import get_num_words
+import sys
+from stats import get_num_words, count_letters, sort_dict_by_values
 
 def get_book_text (path_to_file):
     with open(path_to_file, encoding="utf-8") as f:
@@ -8,9 +8,27 @@ def get_book_text (path_to_file):
     return read_data
 
 def main ():
-    path_to_book = PATH_TO_BOOK
+    if len(sys.argv) != 2:
+        print(f"Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    
+    path_to_book = sys.argv[1]
     book_text = get_book_text(path_to_book)
     words = get_num_words(book_text)
-    print(f"{words} words found in the document")
+    letters = count_letters(book_text)
+    sorted_letters = sort_dict_by_values(letters)
+    
+    print("============ BOOKBOT ============")
+    print(f"Analyzing book found at {path_to_book}...")
+    print("----------- Word Count ----------")
+    print(f"Found {words} total words")
+    print("--------- Character Count -------")
+    
+    for char, count in sorted_letters.items():
+        print(f"{char}: {count}")
+    
+    print("============= END ===============")
+
+
 
 main()
